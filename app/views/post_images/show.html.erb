@@ -26,6 +26,26 @@
   </div>
   <% end %>
 <% end %>
+  <!--favorite機能-->
+  <% if @post_image.favorited_by?(current_user) %>
+  <!--showアクションの変数が入ってくる、対応しているアクションの中身の変数しか使えない-->
+  <!--アクション名とビューファイルは名前一致のものしか通信できない-->
+  <!--モデル内で定義した自作のメソッドをここで使用-->
+  <!--投稿画像に付けられた「いいね」に、自分（ログインしているユーザ）が含まれているか判定-->
+    <p>
+      <%= link_to post_image_favorites_path(@post_image), method: :delete do %>
+        ♥<%= @post_image.favorites.count %> いいね
+      <% end %>
+      <!--deleteする時のview画面は♥なので、このように記載している。-->
+    </p>
+    <% else %>
+    <p>
+      <%= link_to post_image_favorites_path(@post_image), method: :post do %>
+        ♡<%= @post_image.favorites.count %> いいね
+      <% end %>
+    </p>
+  <% end %>
+  
 </div>
 <div class="new-comment">
 <%= form_with(model:[@post_image, @post_comment], local: true) do |f| %>

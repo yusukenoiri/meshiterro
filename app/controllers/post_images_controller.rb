@@ -14,7 +14,9 @@ class PostImagesController < ApplicationController
   end
 
   def index
-    @post_images =PostImage.all
+    @post_images = PostImage.page(params[:page]).reverse_order
+    # 1ページ分の決められた数のデータだけを、新しい順に取得
+    # ページに表示させる件数の設定は、config/initializersのkaminari_config.rbファイルに記述
   end
 
   def show
