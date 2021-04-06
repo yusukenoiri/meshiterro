@@ -7,9 +7,13 @@ class PostImagesController < ApplicationController
   def create
     @post_image = PostImage.new(post_image_params)
     @post_image.user_id = current_user.id
-    @post_image.save
-    redirect_to post_images_path
+    if @post_image.save
     # 投稿データを保存するアクションメソッド(POST)
+      redirect_to post_images_path
+    else
+      render :new
+      # render :アクション名で、同じコントローラ内の別アクションのViewを表示できる
+    end
     # 投稿データを保存するには、Strong Parametersも必要
   end
 

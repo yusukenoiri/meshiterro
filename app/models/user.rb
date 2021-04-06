@@ -12,4 +12,6 @@ class User < ApplicationRecord
   has_many :post_images, dependent: :destroy
   has_many :post_comments, dependent: :destroy
   has_many :favorites, dependent: :destroy
+  attachment :profile_image
+  # attachment メソッドの引数に与える名前はカラム名からidを取ったもの
 end

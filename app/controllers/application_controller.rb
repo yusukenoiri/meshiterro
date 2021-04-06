@@ -1,4 +1,10 @@
 class ApplicationController < ActionController::Base
+  before_action :authenticate_user!,except: [:top]
+  # 全てのコントローラーでアクション実行前に行われる
+  # authenticate_userメソッドは、devise側が用意しているメソッド
+  # :authenticate_user!とすることによって、「ログイン認証されていなければ、ログイン画面へリダイレクトする」機能を実装
+  # exceptは指定したアクションをbefore_actionの対象から外す。今回の場合homes#top。
+  
   protect_from_forgery with: :exception
   before_action :configure_permitted_parameters, if: :devise_controller?
   # （ユーザ登録、ログイン認証など）が使われる場合、その前にconfigure_permitted_parametersが実行される

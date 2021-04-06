@@ -1,4 +1,14 @@
+<div class="profile-container">
+  <h3 class="profile-name"><%= @user.name %></h3>
+  <%= attachment_image_tag @user, :profile_image, :fill, 100, 100, format: 'jpeg', fallback: "no_image.jpg" %>
+  
+  <% if @user.id == current_user.id %>
+    <p><%= link_to "プロフィール編集", edit_user_path(@user) %></p>
+  <% end %>
+</div>
 <%= render 'post_images/list', post_images: @post_images %>
+<!--部分テンプレートを呼び出せるよう設定-->
+
 <%#= render [部分テンプレートファイルの指定], [ローカル変数]:[渡す値] %>
 <!--部分テンプレートファイルを呼び出すには、renderを使う-->
 <!--'post_images/list'で部分テンプレートのパス（app/viewsより下のパス）を記述する-->
