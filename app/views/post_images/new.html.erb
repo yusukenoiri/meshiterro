@@ -1,22 +1,36 @@
-<h1>画像投稿フォーム</h1>
-<% if @post_image.errors.any? %>
-<!--errorsはモデルにバリデーションをかけたときに、発生したエラーの内容を確認できるメソッド-->
-  <%= @post_image.errors.count %>件のエラーが発生しました
-  <% @post_image.errors.full_messages.each do |message| %>
-    <%= message %>
-  <% end %>
-<% end %>
-
-<%= form_with model: @post_image, local:true do |f| %>
-<!--form_withはrails 5.1以上-->
-  <h4>画像</h4>
-  <%= f.attachment_field :image %>
-  <!--refileの文法の決まりで_idは要らない決まり-->
-  <!--指定するフィールド名は、image_idから_idを除いた名前（image）を指定-->
-  <h4>ショップ名</h4>
-  <%= f.text_field :shop_name %>
-  <!--カラムにユーザーが入れるものを保存するイメージ-->
-  <h4>説明</h4>
-  <%= f.text_area :caption %>
-  <%= f.submit '投稿' %>
-<% end %>
+<div class="containar">
+  <div class="row no-gutters">
+    <div class="col-md-5 col-sm-10 mx-2 mx-sm-auto shadow-lg rounded px-0 my-5">
+      mx-2=左右のマージンを0.5rem(全て(≥0px), mx-sm-auto=左右のマージンauto(小以上(≥576px), shadow-lg=影（濃い）, 
+      <!--rounded=すべて角丸, px-0=左右のパディングを0(全て(≥0px), my-5=上下のマージンを3rem(全て(≥0px)-->
+      <!--col-sm-10=画面幅が576px以上のときに12分割したグリッドの10分割分の幅をとる※このときの10分割分の幅は親要素であるrowの幅に依存-->
+      <!--col-sm-10=画面幅が768px以上のときに12分割したグリッドの5分割分の幅をとる※このときの10分割分の幅は親要素であるrowの幅に依存-->
+      <h5 class="text-dark bg-light p-4 mb-0">画像投稿フォーム</h5>
+      <div class="form-body p-4">
+        <% if @post_image.errors.any? %>
+        <!--errorsはモデルにバリデーションをかけたときに、発生したエラーの内容を確認できるメソッド-->
+          <%= @post_image.errors.count %>件のエラーが発生しました
+          <% @post_image.errors.full_messages.each do |message| %>
+            <%= message %>
+          <% end %>
+        <% end %>
+        <%= form_with model: @post_image, local:true do |f| %>
+        <!--form_withはrails 5.1以上-->
+          <%= f.attachment_field :image, class: "w-100" %>
+            <!--refileの文法の決まりで_idは要らない決まり-->
+            <!--指定するフィールド名は、image_idから_idを除いた名前（image）を指定-->
+          <div class="input-group mb-3 mt-4">
+            <div class="input-group-prepend">
+              <span class="input-group-text" aria-hidden="true"><i class="fas fa-building"></i></span>
+            </div>
+            <%= f.text_field :shop_name, class:"form-control", placeholder:"ショップ名" %>
+            <!--カラムにユーザーが入れるものを保存するイメージ-->
+          </div>
+          <%= f.text_area :caption, class:"form-control", rows:"3", placeholder:"コメントここに" %>
+          <hr>
+          <%= f.submit '投稿', class:"btn btn-lg btn-block btn-info mt-4" %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

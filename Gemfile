@@ -54,3 +54,8 @@ gem "refile-mini_magick"
 
 gem 'kaminari','~> 1.2.1'
 # ページング機能のために追加
+
+gem 'bootstrap', '~> 4.5'
+gem 'jquery-rails'
+gem 'font-awesome-sass', '~> 5.13'
+# bootstrap機能追加のため
