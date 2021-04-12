@@ -6,6 +6,7 @@
   <p>投稿日時：<%= @post_image.created_at.strftime('%Y/%m/%d') %></p>
   <!--strftimeメソッド('%Y/%m/%d')、 '%Y/%m/%d'の記述で、年/月/日のフォーマットへ変換-->
   <% if @post_image.user == current_user %>
+  <!--post_imageでcreate時に取ってきたUserテーブルのuser_idがcurrent_userと同じだったら。という意味-->
     <%= link_to "削除", post_image_path(@post_image), method: :delete %>
   <% end %>
   <!--もし、投稿者 == 現在ログインしているユーザ だったら-->
@@ -50,8 +51,9 @@
 </div>
 <div class="new-comment">
 <%= form_with(model:[@post_image, @post_comment], local: true) do |f| %>
-<!--配列でインスタンス変数を2つ指定、コメントは、post_imageに結びついた-->
-<!--post_commentにあるため、2つ用意が必要-->
+<!--配列でインスタンス変数を2つ指定、コメントは、post_imageに結びついたネストさせているのでこのように書く（Rails決まり）-->
+<!--post_commentはpost_imageあっての投稿なので、紐づいた変数用意が必要-->
+<!--空だとPost,中身あるとPATCH-->
   <%= f.text_area :comment, rows:'5',placeholder: "コメントをここに" %>
   <%= f.submit "送信する" %>
 <% end %>

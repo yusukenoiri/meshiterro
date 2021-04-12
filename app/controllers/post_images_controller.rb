@@ -7,6 +7,7 @@ class PostImagesController < ApplicationController
   def create
     @post_image = PostImage.new(post_image_params)
     @post_image.user_id = current_user.id
+    # この行で@post_image変数にuserテーブルのidを紐付かせている
     if @post_image.save
     # 投稿データを保存するアクションメソッド(POST)
       redirect_to post_images_path
@@ -18,6 +19,7 @@ class PostImagesController < ApplicationController
   end
 
   def index
+    # @post_images = PostImage.all
     @post_images = PostImage.page(params[:page]).reverse_order
     # 1ページ分の決められた数のデータだけを、新しい順に取得
     # ページに表示させる件数の設定は、config/initializersのkaminari_config.rbファイルに記述
@@ -25,6 +27,7 @@ class PostImagesController < ApplicationController
 
   def show
     @post_image = PostImage.find(params[:id])
+    # (params[:id])　はUrlのidを取ってきているイメージ
     @post_comment = PostComment.new
   end
 

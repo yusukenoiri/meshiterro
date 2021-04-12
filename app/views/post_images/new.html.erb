@@ -1,7 +1,7 @@
 <div class="containar">
   <div class="row no-gutters">
     <div class="col-md-5 col-sm-10 mx-2 mx-sm-auto shadow-lg rounded px-0 my-5">
-      mx-2=左右のマージンを0.5rem(全て(≥0px), mx-sm-auto=左右のマージンauto(小以上(≥576px), shadow-lg=影（濃い）, 
+      <!--mx-2=左右のマージンを0.5rem(全て(≥0px), mx-sm-auto=左右のマージンauto(小以上(≥576px), shadow-lg=影（濃い）, -->
       <!--rounded=すべて角丸, px-0=左右のパディングを0(全て(≥0px), my-5=上下のマージンを3rem(全て(≥0px)-->
       <!--col-sm-10=画面幅が576px以上のときに12分割したグリッドの10分割分の幅をとる※このときの10分割分の幅は親要素であるrowの幅に依存-->
       <!--col-sm-10=画面幅が768px以上のときに12分割したグリッドの5分割分の幅をとる※このときの10分割分の幅は親要素であるrowの幅に依存-->
@@ -9,6 +9,7 @@
       <div class="form-body p-4">
         <% if @post_image.errors.any? %>
         <!--errorsはモデルにバリデーションをかけたときに、発生したエラーの内容を確認できるメソッド-->
+        <!--any?と組み合わせることで、エラーが発生しているかどうかを判定できる-->
           <%= @post_image.errors.count %>件のエラーが発生しました
           <% @post_image.errors.full_messages.each do |message| %>
             <%= message %>

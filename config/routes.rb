@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   devise_for :users
   root to: 'homes#top'
   # ルートパスでtop画面へ遷移できるように設定
+  
   resources :post_images, only: [:new, :create, :index, :show, :destroy] do
     resource :favorites, only: [:create, :destroy]
     # s複数形にしない。単数にするとコントローラーのidがリクエストに含まれなくなる

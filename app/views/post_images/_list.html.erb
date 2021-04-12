@@ -5,12 +5,14 @@
   
   <div class="card w-50 mx-auto mt-4 shadow-lg">
     <!--w-50=with50%, mx-auto=左右のマージンをauto, mt-4=上側のマージンを1.5rem, shadow-lg=影（濃い）-->
-    よく使うクラスまとめ：https://qiita.com/nakanishi03/items/c80a16b9b9796c25f890
+    <!--よく使うクラスまとめ：https://qiita.com/nakanishi03/items/c80a16b9b9796c25f890-->
     <%= link_to post_image_path(post_image.id) do %>
       <%= attachment_image_tag post_image, :image, class:"card-img-top"; %>
       <!--attachment_image_tagは、refile側が用意したヘルパーで、imgタグを作成してくれる-->
       <!--post_image変数のimage_idに保存された画像のimgタグを生成する-->
+      <!--link_toのdoとendで囲むことでattachment_image_tagはaタグに囲まれたことになりimgにリンクをつけれる-->
     <% end %>
+    
     <div class="card-body">
       <!--カードのコンテンツ部分をcard-bodyで括る-->
       <div class="row">
@@ -31,6 +33,7 @@
           <p class="card-text">説明：<%= post_image.caption %></p>
           <!--コンテンツ内の説明部分-->
           <span><i class="fas fa-user"></i> By <%= post_image.user.name %> ｜ </span>
+          <!--post_image変数のuser_idに紐づく名前を抽出してきている-->
           <span><%= link_to "#{post_image.post_comments.count} コメント", post_image_path(post_image.id), class:"text-dark" %></span>
           <!--imageにネストされたcommnets内のcomment-->
         </div>
